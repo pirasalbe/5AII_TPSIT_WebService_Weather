@@ -5,6 +5,8 @@
  */
 package webservice;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.Proxy;
 import java.net.URL;
@@ -24,7 +26,7 @@ public class Weather {
     
     public Document forecast(){   
         Document doc = null;
-        String uri="http://api.openweathermap.org/data/2.5/weather?q=" + citta + "&APPID=6bcbb00e4ebd8c2f0410b0537386b957";
+        String uri="http://api.openweathermap.org/data/2.5/weather?q=" + citta + "&mode=xml&APPID=6bcbb00e4ebd8c2f0410b0537386b957";
     
         try {
 
@@ -42,6 +44,15 @@ public class Weather {
 		if (conn.getResponseCode() != 200) {
 			throw new RuntimeException("Failed : HTTP error code : "
 					+ conn.getResponseCode());
+		}
+                
+                BufferedReader br = new BufferedReader(new InputStreamReader(
+			(conn.getInputStream())));
+
+		String output;
+		System.out.println("Output from Server .... ");
+		while ((output = br.readLine()) != null) {
+			System.out.println(output);
 		}
                 
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
