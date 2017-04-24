@@ -6,12 +6,16 @@
 package webservice;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Authenticator;
 import java.net.InetSocketAddress;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import org.w3c.dom.Element;
 
 /**
  *
@@ -26,6 +30,13 @@ public class WebService {
         BufferedReader in = new BufferedReader(new InputStreamReader(
 			(System.in)));
         
+        String citta = "London";
+        
+        try {
+            citta = in.readLine();
+        } catch (IOException ex) {
+            Logger.getLogger(WebService.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         //proxy
         Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("172.18.0.1", 3128));
@@ -41,7 +52,11 @@ public class WebService {
         Authenticator.setDefault(authenticator);
         //end of proxy
         
+        Weather w = new Weather(citta,proxy);
         
+        Element e = w.forecast();
+        
+        System.out.println(e.getTextContent());
     }
     
 }
