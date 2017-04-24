@@ -24,7 +24,7 @@ public class Weather {
     
     public Element forecast(){   
         Element element = null;
-        String uri="api.openweathermap.org/data/2.5/weather?q=" + citta;
+        String uri="http://api.openweathermap.org/data/2.5/weather?q=" + citta + "&APPID=6bcbb00e4ebd8c2f0410b0537386b957";
     
         try {
 

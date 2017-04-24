@@ -33,6 +33,7 @@ public class WebService {
         String citta = "London";
         
         try {
+            System.out.print("Write a city: ");
             citta = in.readLine();
         } catch (IOException ex) {
             Logger.getLogger(WebService.class.getName()).log(Level.SEVERE, null, ex);
