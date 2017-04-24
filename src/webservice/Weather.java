@@ -22,8 +22,8 @@ public class Weather {
         this.proxy = proxy;
     }
     
-    public Element forecast(){   
-        Element element = null;
+    public Document forecast(){   
+        Document doc = null;
         String uri="http://api.openweathermap.org/data/2.5/weather?q=" + citta + "&APPID=6bcbb00e4ebd8c2f0410b0537386b957";
     
         try {
@@ -46,8 +46,7 @@ public class Weather {
                 
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder builder = factory.newDocumentBuilder();
-                Document doc = builder.parse(conn.getInputStream());
-                element = doc.getDocumentElement();
+                doc = builder.parse(conn.getInputStream());
 
 		conn.disconnect();
 
@@ -57,7 +56,7 @@ public class Weather {
 
 	  }
     
-        return element;
+        return doc;
         
     }
     

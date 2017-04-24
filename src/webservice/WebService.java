@@ -11,6 +11,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.Authenticator;
 import java.net.InetSocketAddress;
+import org.w3c.dom.Document;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 import java.util.logging.Level;
@@ -55,9 +56,9 @@ public class WebService {
         
         Weather w = new Weather(citta,proxy);
         
-        Element e = w.forecast();
+        Document d = w.forecast();
         
-        System.out.println(e.getTextContent());
+        System.out.println(d.getChildNodes());
     }
     
 }
