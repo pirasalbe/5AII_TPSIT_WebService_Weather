@@ -46,14 +46,16 @@ public class Weather {
 					+ conn.getResponseCode());
 		}
                 
+                /*debug
                 BufferedReader br = new BufferedReader(new InputStreamReader(
 			(conn.getInputStream())));
-
+                
 		String output;
 		System.out.println("Output from Server .... ");
 		while ((output = br.readLine()) != null) {
 			System.out.println(output);
 		}
+                *///end debug
                 
                 DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
                 DocumentBuilder builder = factory.newDocumentBuilder();

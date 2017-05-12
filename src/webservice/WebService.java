@@ -17,6 +17,8 @@ import java.net.Proxy;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
 
 /**
  *
@@ -58,7 +60,30 @@ public class WebService {
         
         Document d = w.forecast();
         
-        System.out.println(d.getChildNodes());
+        doSomething(d.getFirstChild());
     }
     
+    public static void doSomething(Node node) {
+    // do something with the current node instead of System.out
+    System.out.println(node.getNodeName() + ": ");
+    
+    if(node.getNodeValue() != null) 
+        System.out.println(node.getNodeValue() + ", ");
+    
+    Node currentNode;
+    int i;
+    for (i = 0; i < node.getAttributes().getLength(); i++) {
+        currentNode = node.getAttributes().item(i);
+        System.out.println("\t" + currentNode.getNodeName() + ": " + currentNode.getNodeValue());
+    }
+
+    NodeList nodeList = node.getChildNodes();
+    for (i = 0; i < nodeList.getLength(); i++) {
+        currentNode = nodeList.item(i);
+        if (currentNode.getNodeType() == Node.ELEMENT_NODE) {
+            //calls this method for all the children which is Element
+            doSomething(currentNode);
+        }
+    }
+}
 }
